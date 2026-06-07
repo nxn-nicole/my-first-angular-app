@@ -1,11 +1,22 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { TaskCard } from './shared/components/task-card/task-card';
+import { Task } from './shared/models/task.model';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [TaskCard],
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('my-first-angular-app');
+  tasks = signal<Task[]>([
+    { id: '1', title: 'Learn Angular signals', completed: false },
+    { id: '2', title: 'Build a task card component', completed: true },
+    { id: '3', title: 'Style with Tailwind CSS', completed: false },
+  ]);
+
+  onTaskToggled(updatedTask: Task) {
+    this.tasks.update(tasks =>
+      tasks.map(t => (t.id === updatedTask.id ? updatedTask : t))
+    );
+  }
 }

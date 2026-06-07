@@ -1,4 +1,8 @@
-<div>
-  <h1>Welcome to My App!</h1>
-  <p>This is the main application component.</p>
+<div class="min-h-screen bg-gray-100 p-8">
+  <h1 class="mb-6 text-2xl font-bold text-gray-900">My Tasks</h1>
+  <div class="flex flex-col gap-3">
+    @for (task of tasks(); track task.id) {
+      <app-task-card [task]="task" (toggled)="onTaskToggled($event)" />
+    }
+  </div>
 </div>

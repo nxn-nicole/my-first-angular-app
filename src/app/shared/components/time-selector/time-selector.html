@@ -1,7 +1,8 @@
 <div>
   <div class="flex flex-row gap-4 mb-4 items-center justify-center">
     <label>Year</label>
-    <input type="number" class="w-full rounded border-gray-300 p-2" placeholder="1" />
+
+    <input type="number" appearance="outline" placeholder="1" />
   </div>
   <div class="flex flex-row gap-2">
     <button>Spring</button>
@@ -16,10 +17,9 @@
       </button>
     }
   </div>
-  <mat-form-field class="w-full mt-4" appearance="outline">
+  <div>
     <mat-label>Time</mat-label>
-    <input matInput [matTimepicker]="picker" />
-
-    <mat-timepicker #picker interval="30m" />
-  </mat-form-field>
+    <input [matTimepicker]="picker" class="ml-4 border border-gray-300 rounded-lg px-2 py-1" />
+    <mat-timepicker #picker interval="30m" panelClass="custom-timepicker" />
+  </div>
 </div>

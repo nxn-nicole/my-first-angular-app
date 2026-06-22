@@ -1,11 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { TaskCard } from './shared/components/task-card/task-card';
 import { Task } from './shared/models/task.model';
-import { MatIconModule } from '@angular/material/icon';
+import { AddTaskButton } from './shared/components/add-task-button/add-task-button';
 
 @Component({
   selector: 'app-root',
-  imports: [TaskCard, MatIconModule],
+  imports: [TaskCard, AddTaskButton],
   templateUrl: './app.html',
 })
 export class App {

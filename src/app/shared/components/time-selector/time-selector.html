@@ -1,0 +1,15 @@
+<div>
+  <div className="flex flex-col gap-2">
+    <button>Spring</button>
+    <button>Summer</button>
+    <button>Fall</button>
+    <button>Winter</button>
+  </div>
+  <div class="grid grid-cols-7 gap-1">
+    @for (day of days; track day) {
+      <button class="flex h-8 w-8 items-center justify-center rounded text-sm hover:bg-gray-100">
+        {{ day }}
+      </button>
+    }
+  </div>
+</div>

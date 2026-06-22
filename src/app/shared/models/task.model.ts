@@ -6,3 +6,5 @@ export interface Task {
   completed: boolean;
   time: Time;
 }
+
+export type NewTaskDTO = Pick<Task, 'title' | 'time'>;

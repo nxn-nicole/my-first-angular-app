@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { TaskCard } from './shared/components/task-card/task-card';
-import { Task } from './shared/models/task.model';
+import { NewTaskDTO, Task } from './shared/models/task.model';
 import { Time } from './shared/models/time.model';
 import { Season } from './shared/models/season.model';
 import { AddTaskButton } from './shared/components/add-task-button/add-task-button';
@@ -32,8 +32,11 @@ export class App {
     },
   ]);
 
-  addTask(title: string, time: Time) {
-    this.tasks.update((tasks) => [...tasks, { id: crypto.randomUUID(), title, completed: false, time }]);
+  addTask(newTask: NewTaskDTO) {
+    this.tasks.update((tasks) => [
+      ...tasks,
+      { id: crypto.randomUUID(), ...newTask, completed: false },
+    ]);
   }
 
   onTaskToggled(updatedTask: Task) {

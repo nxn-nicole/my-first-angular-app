@@ -10,14 +10,15 @@
     />
   </div>
   <div class="flex flex-row gap-2">
-    <button (click)="selectSeason(Season.SPRING)" [class.bg-blue-100]="selectedSeason() === Season.SPRING">Spring</button>
-    <button (click)="selectSeason(Season.SUMMER)" [class.bg-blue-100]="selectedSeason() === Season.SUMMER">Summer</button>
-    <button (click)="selectSeason(Season.AUTUMN)" [class.bg-blue-100]="selectedSeason() === Season.AUTUMN">Fall</button>
-    <button (click)="selectSeason(Season.WINTER)" [class.bg-blue-100]="selectedSeason() === Season.WINTER">Winter</button>
+    <button type="button" (click)="selectSeason(Season.SPRING)" [class.bg-blue-100]="selectedSeason() === Season.SPRING">Spring</button>
+    <button type="button" (click)="selectSeason(Season.SUMMER)" [class.bg-blue-100]="selectedSeason() === Season.SUMMER">Summer</button>
+    <button type="button" (click)="selectSeason(Season.AUTUMN)" [class.bg-blue-100]="selectedSeason() === Season.AUTUMN">Fall</button>
+    <button type="button" (click)="selectSeason(Season.WINTER)" [class.bg-blue-100]="selectedSeason() === Season.WINTER">Winter</button>
   </div>
   <div class="grid grid-cols-7 gap-1">
     @for (day of days; track day) {
       <button
+        type="button"
         (click)="selectDay(day)"
         class="flex h-8 w-8 items-center justify-center rounded-lg text-sm hover:bg-gray-100"
         [class.bg-blue-500]="selectedDay() === day"

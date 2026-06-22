@@ -3,6 +3,7 @@ import { take } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { AddTaskPopup } from '../add-task-popup/add-task-popup';
+import { NewTaskDTO } from '../../models/task.model';
 
 @Component({
   selector: 'app-add-task-button',
@@ -11,7 +12,7 @@ import { AddTaskPopup } from '../add-task-popup/add-task-popup';
 })
 export class AddTaskButton {
   private readonly dialog = inject(MatDialog);
-  taskAdded = output<string>();
+  taskAdded = output<NewTaskDTO>();
 
   openPopup() {
     this.dialog
@@ -21,9 +22,8 @@ export class AddTaskButton {
       })
       .afterClosed()
       .pipe(take(1))
-      .subscribe((title) => {
-        if (!title) return;
-        this.taskAdded.emit(title);
+      .subscribe((task) => {
+        this.taskAdded.emit(task);
       });
   }
 }

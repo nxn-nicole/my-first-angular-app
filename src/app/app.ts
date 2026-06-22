@@ -15,6 +15,13 @@ export class App {
     { id: '3', title: 'Style with Tailwind CSS', completed: false },
   ]);
 
+  addTask(title: string) {
+    this.tasks.update((tasks) => [
+      ...tasks,
+      { id: crypto.randomUUID(), title, completed: false },
+    ]);
+  }
+
   onTaskToggled(updatedTask: Task) {
     this.tasks.update((tasks) => tasks.map((t) => (t.id === updatedTask.id ? updatedTask : t)));
   }

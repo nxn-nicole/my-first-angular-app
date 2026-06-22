@@ -1,7 +1,7 @@
 <div class="min-h-screen bg-gray-100 p-8">
   <div class="flex flex-row items-center mb-6">
     <h1 class="text-2xl font-bold text-gray-900">My Tasks</h1>
-    <app-add-task-button />
+    <app-add-task-button (taskAdded)="addTask($event)" />
   </div>
   <div class="flex flex-col gap-3">
     @for (task of tasks(); track task.id) {

@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { TaskCard } from './shared/components/task-card/task-card';
 import { Task } from './shared/models/task.model';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
-  imports: [TaskCard],
+  imports: [TaskCard, MatIconModule],
   templateUrl: './app.html',
 })
 export class App {
@@ -15,8 +16,6 @@ export class App {
   ]);
 
   onTaskToggled(updatedTask: Task) {
-    this.tasks.update(tasks =>
-      tasks.map(t => (t.id === updatedTask.id ? updatedTask : t))
-    );
+    this.tasks.update((tasks) => tasks.map((t) => (t.id === updatedTask.id ? updatedTask : t)));
   }
 }

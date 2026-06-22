@@ -23,6 +23,7 @@ export class AddTaskButton {
       .afterClosed()
       .pipe(take(1))
       .subscribe((task) => {
+        if (!task) return;
         this.taskAdded.emit(task);
       });
   }

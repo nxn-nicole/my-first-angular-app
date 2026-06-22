@@ -16,10 +16,10 @@
       </button>
     }
   </div>
-  <mat-form-field class="w-full mt-4">
+  <mat-form-field class="w-full mt-4" appearance="outline">
     <mat-label>Time</mat-label>
     <input matInput [matTimepicker]="picker" />
-    <mat-timepicker-toggle matIconSuffix [for]="picker" />
+
     <mat-timepicker #picker interval="30m" />
   </mat-form-field>
 </div>

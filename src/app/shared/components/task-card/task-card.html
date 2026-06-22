@@ -1,4 +1,6 @@
-<div class="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-colors hover:bg-gray-50">
+<div
+  class="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-colors hover:bg-gray-50"
+>
   <mat-checkbox [checked]="task().completed" (change)="onToggle()" />
   <span
     class="text-sm font-medium transition-colors"
@@ -8,4 +10,9 @@
   >
     {{ task().title }}
   </span>
+  <mat-icon
+    class="ml-auto cursor-pointer text-gray-400 transition-colors hover:text-gray-600"
+    (click)="onDelete()"
+    >close</mat-icon
+  >
 </div>

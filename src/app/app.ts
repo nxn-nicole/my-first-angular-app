@@ -25,4 +25,8 @@ export class App {
   onTaskToggled(updatedTask: Task) {
     this.tasks.update((tasks) => tasks.map((t) => (t.id === updatedTask.id ? updatedTask : t)));
   }
+
+  onTaskDeleted(id: string) {
+    this.tasks.update((tasks) => tasks.filter((t) => t.id !== id));
+  }
 }

@@ -3,34 +3,31 @@
 <mat-dialog-content class="w-full max-w-sm">
   <label class="mb-2 block text-sm font-medium text-gray-700" for="task-title"> Task title </label>
   <div class="items-center justify-center">
-    <input
-      id="task-title"
-      type="text"
-      class="w-full rounded-lg border border-gray-300 px-3 py-2 mb-4 text-sm outline-none transition-colors focus:border-blue-500"
-      [value]="draftTitle()"
-      (input)="updateDraftTitle($event)"
-      (keydown.enter)="submitTask()"
-      placeholder="Buy groceries"
-    />
-    <mat-divider></mat-divider>
-    <app-time-selector class="mt-4" />
+    <form [formGroup]="taskForm" (ngSubmit)="submitTask()">
+      <input
+        id="task-title"
+        formControlName="title"
+        type="text"
+        class="w-full rounded-lg border border-gray-300 px-3 py-2 mb-4 text-sm outline-none transition-colors focus:border-blue-500"
+        placeholder="Buy groceries"
+      />
+      <mat-divider></mat-divider>
+      <app-time-selector class="mt-4" formControlName="time" />
+      <div>
+        <button
+          type="button"
+          class="rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100"
+          (click)="close()"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="rounded-lg bg-blue-500 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-blue-300"
+        >
+          Add
+        </button>
+      </div>
+    </form>
   </div>
 </mat-dialog-content>
-
-<mat-dialog-actions align="end" class="!px-6 !pb-6 !pt-4">
-  <button
-    type="button"
-    class="rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100"
-    (click)="close()"
-  >
-    Cancel
-  </button>
-  <button
-    type="button"
-    class="rounded-lg bg-blue-500 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-blue-300"
-    [disabled]="!draftTitle().trim()"
-    (click)="submitTask()"
-  >
-    Add
-  </button>
-</mat-dialog-actions>

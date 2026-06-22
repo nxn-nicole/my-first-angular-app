@@ -16,31 +16,10 @@
       </button>
     }
   </div>
-  <div class="mt-4 flex items-center justify-center gap-2">
-    <div class="flex flex-col items-center gap-1">
-      <span class="text-xs text-gray-500">Hour</span>
-      <div class="h-32 w-12 snap-y snap-mandatory overflow-y-scroll">
-        @for (hour of hours; track hour) {
-          <div
-            class="flex h-10 snap-center items-center justify-center rounded text-sm hover:bg-gray-100 cursor-pointer"
-          >
-            {{ hour }}
-          </div>
-        }
-      </div>
-    </div>
-    <span class="mt-4 text-lg font-bold text-gray-400">:</span>
-    <div class="flex flex-col items-center gap-1">
-      <span class="text-xs text-gray-500">Minute</span>
-      <div class="h-32 w-12 snap-y snap-mandatory overflow-y-scroll">
-        @for (minute of minutes; track minute) {
-          <div
-            class="flex h-10 snap-center items-center justify-center rounded text-sm hover:bg-gray-100 cursor-pointer"
-          >
-            {{ minute }}
-          </div>
-        }
-      </div>
-    </div>
-  </div>
+  <mat-form-field class="w-full mt-4">
+    <mat-label>Time</mat-label>
+    <input matInput [matTimepicker]="picker" />
+    <mat-timepicker-toggle matIconSuffix [for]="picker" />
+    <mat-timepicker #picker interval="30m" />
+  </mat-form-field>
 </div>

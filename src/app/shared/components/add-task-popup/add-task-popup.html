@@ -1,17 +1,20 @@
 <h2 mat-dialog-title class="text-lg font-semibold text-gray-900">Add Task</h2>
 
-<mat-dialog-content class="w-full max-w-sm !pb-0">
+<mat-dialog-content class="w-full max-w-sm">
   <label class="mb-2 block text-sm font-medium text-gray-700" for="task-title"> Task title </label>
-  <input
-    id="task-title"
-    type="text"
-    class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none transition-colors focus:border-blue-500"
-    [value]="draftTitle()"
-    (input)="updateDraftTitle($event)"
-    (keydown.enter)="submitTask()"
-    placeholder="Buy groceries"
-  />
-  <app-time-selector class="mt-4" />
+  <div class="items-center justify-center">
+    <input
+      id="task-title"
+      type="text"
+      class="w-full rounded-lg border border-gray-300 px-3 py-2 mb-4 text-sm outline-none transition-colors focus:border-blue-500"
+      [value]="draftTitle()"
+      (input)="updateDraftTitle($event)"
+      (keydown.enter)="submitTask()"
+      placeholder="Buy groceries"
+    />
+    <mat-divider></mat-divider>
+    <app-time-selector class="mt-4" />
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end" class="!px-6 !pb-6 !pt-4">

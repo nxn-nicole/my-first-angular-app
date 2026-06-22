@@ -1,9 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { TimeSelector } from '../time-selector/time-selector';
 
 @Component({
   selector: 'app-add-task-popup',
-  imports: [MatDialogModule],
+  imports: [MatDialogModule, TimeSelector],
   templateUrl: './add-task-popup.html',
 })
 export class AddTaskPopup {

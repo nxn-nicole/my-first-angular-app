@@ -1,5 +1,9 @@
 <div>
-  <div className="flex flex-col gap-2">
+  <div class="flex flex-row gap-4 mb-4 items-center justify-center">
+    <label>Year</label>
+    <input type="number" class="w-full rounded border-gray-300 p-2" placeholder="1" />
+  </div>
+  <div class="flex flex-row gap-2">
     <button>Spring</button>
     <button>Summer</button>
     <button>Fall</button>
@@ -11,5 +15,32 @@
         {{ day }}
       </button>
     }
+  </div>
+  <div class="mt-4 flex items-center justify-center gap-2">
+    <div class="flex flex-col items-center gap-1">
+      <span class="text-xs text-gray-500">Hour</span>
+      <div class="h-32 w-12 snap-y snap-mandatory overflow-y-scroll">
+        @for (hour of hours; track hour) {
+          <div
+            class="flex h-10 snap-center items-center justify-center rounded text-sm hover:bg-gray-100 cursor-pointer"
+          >
+            {{ hour }}
+          </div>
+        }
+      </div>
+    </div>
+    <span class="mt-4 text-lg font-bold text-gray-400">:</span>
+    <div class="flex flex-col items-center gap-1">
+      <span class="text-xs text-gray-500">Minute</span>
+      <div class="h-32 w-12 snap-y snap-mandatory overflow-y-scroll">
+        @for (minute of minutes; track minute) {
+          <div
+            class="flex h-10 snap-center items-center justify-center rounded text-sm hover:bg-gray-100 cursor-pointer"
+          >
+            {{ minute }}
+          </div>
+        }
+      </div>
+    </div>
   </div>
 </div>

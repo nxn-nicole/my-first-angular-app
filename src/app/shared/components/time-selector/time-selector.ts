@@ -1,4 +1,5 @@
 import { Component, input, linkedSignal, output } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTimepickerModule } from '@angular/material/timepicker';
@@ -7,7 +8,7 @@ import { Season } from '../../models/season.model';
 
 @Component({
   selector: 'app-time-selector',
-  imports: [MatFormFieldModule, MatInputModule, MatTimepickerModule],
+  imports: [NgClass, MatFormFieldModule, MatInputModule, MatTimepickerModule],
   templateUrl: './time-selector.html',
 })
 export class TimeSelector {
@@ -38,6 +39,16 @@ export class TimeSelector {
 
   onYearChange(event: Event) {
     this.selectedYear.set(Number((event.target as HTMLInputElement).value));
+    this.emit();
+  }
+
+  incrementYear() {
+    this.selectedYear.update(y => y + 1);
+    this.emit();
+  }
+
+  decrementYear() {
+    this.selectedYear.update(y => Math.max(1, y - 1));
     this.emit();
   }
 

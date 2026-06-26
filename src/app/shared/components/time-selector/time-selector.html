@@ -1,41 +1,107 @@
-<div>
-  <div class="flex flex-row gap-4 mb-4 items-center justify-center">
-    <label>Year</label>
-    <input
-      type="number"
-      [value]="selectedYear()"
-      (input)="onYearChange($event)"
-      class="w-20 rounded border border-gray-300 px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-gray-400"
-      placeholder="1"
-    />
-  </div>
-  <div class="flex flex-row gap-2">
-    <button type="button" (click)="selectSeason(Season.SPRING)" [class.bg-blue-100]="selectedSeason() === Season.SPRING">Spring</button>
-    <button type="button" (click)="selectSeason(Season.SUMMER)" [class.bg-blue-100]="selectedSeason() === Season.SUMMER">Summer</button>
-    <button type="button" (click)="selectSeason(Season.AUTUMN)" [class.bg-blue-100]="selectedSeason() === Season.AUTUMN">Fall</button>
-    <button type="button" (click)="selectSeason(Season.WINTER)" [class.bg-blue-100]="selectedSeason() === Season.WINTER">Winter</button>
-  </div>
-  <div class="grid grid-cols-7 gap-1">
-    @for (day of days; track day) {
+<div class="flex flex-col gap-5 py-2">
+
+  <!-- Year -->
+  <div class="flex flex-col gap-1.5">
+    <span class="text-xs font-medium uppercase tracking-wide text-gray-500">Year</span>
+    <div class="flex items-center gap-2">
       <button
         type="button"
-        (click)="selectDay(day)"
-        class="flex h-8 w-8 items-center justify-center rounded-lg text-sm hover:bg-gray-100"
-        [class.bg-blue-500]="selectedDay() === day"
-        [class.text-white]="selectedDay() === day"
+        (click)="decrementYear()"
+        class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-300 text-gray-600 transition-colors hover:bg-gray-100"
+      >−</button>
+      <input
+        type="number"
+        [value]="selectedYear()"
+        (input)="onYearChange($event)"
+        class="w-16 rounded-lg border border-gray-300 px-2 py-1 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
+      />
+      <button
+        type="button"
+        (click)="incrementYear()"
+        class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-300 text-gray-600 transition-colors hover:bg-gray-100"
+      >+</button>
+    </div>
+  </div>
+
+  <!-- Season -->
+  <div class="flex flex-col gap-1.5">
+    <span class="text-xs font-medium uppercase tracking-wide text-gray-500">Season</span>
+    <div class="grid grid-cols-4 gap-1.5">
+      <button
+        type="button"
+        (click)="selectSeason(Season.SPRING)"
+        class="flex flex-col items-center gap-0.5 rounded-lg border py-2 text-xs font-medium transition-colors"
+        [ngClass]="selectedSeason() === Season.SPRING
+          ? 'border-green-400 bg-green-50 text-green-700'
+          : 'border-gray-200 text-gray-600 hover:bg-gray-50'"
       >
-        {{ day }}
+        <span>🌸</span>Spring
       </button>
-    }
+      <button
+        type="button"
+        (click)="selectSeason(Season.SUMMER)"
+        class="flex flex-col items-center gap-0.5 rounded-lg border py-2 text-xs font-medium transition-colors"
+        [ngClass]="selectedSeason() === Season.SUMMER
+          ? 'border-yellow-400 bg-yellow-50 text-yellow-700'
+          : 'border-gray-200 text-gray-600 hover:bg-gray-50'"
+      >
+        <span>☀️</span>Summer
+      </button>
+      <button
+        type="button"
+        (click)="selectSeason(Season.AUTUMN)"
+        class="flex flex-col items-center gap-0.5 rounded-lg border py-2 text-xs font-medium transition-colors"
+        [ngClass]="selectedSeason() === Season.AUTUMN
+          ? 'border-orange-400 bg-orange-50 text-orange-700'
+          : 'border-gray-200 text-gray-600 hover:bg-gray-50'"
+      >
+        <span>🍂</span>Fall
+      </button>
+      <button
+        type="button"
+        (click)="selectSeason(Season.WINTER)"
+        class="flex flex-col items-center gap-0.5 rounded-lg border py-2 text-xs font-medium transition-colors"
+        [ngClass]="selectedSeason() === Season.WINTER
+          ? 'border-blue-400 bg-blue-50 text-blue-700'
+          : 'border-gray-200 text-gray-600 hover:bg-gray-50'"
+      >
+        <span>❄️</span>Winter
+      </button>
+    </div>
   </div>
-  <div>
-    <mat-label>Time</mat-label>
-    <input
-      [matTimepicker]="picker"
-      [value]="selectedHourMinute()"
-      (valueChange)="onTimeChange($event)"
-      class="ml-4 border border-gray-300 rounded-lg px-2 py-1"
-    />
-    <mat-timepicker #picker interval="30m" panelClass="custom-timepicker" />
+
+  <!-- Day -->
+  <div class="flex flex-col gap-1.5">
+    <span class="text-xs font-medium uppercase tracking-wide text-gray-500">Day</span>
+    <div class="grid grid-cols-7 gap-1">
+      @for (day of days; track day) {
+        <button
+          type="button"
+          (click)="selectDay(day)"
+          class="flex h-8 w-8 items-center justify-center rounded-lg text-sm transition-colors"
+          [ngClass]="selectedDay() === day
+            ? 'bg-blue-500 text-white font-medium'
+            : 'text-gray-700 hover:bg-gray-100'"
+        >
+          {{ day }}
+        </button>
+      }
+    </div>
   </div>
+
+  <!-- Time -->
+  <div class="flex flex-col gap-1.5">
+    <span class="text-xs font-medium uppercase tracking-wide text-gray-500">Time</span>
+    <mat-form-field appearance="outline" class="w-full" subscriptSizing="dynamic">
+      <input
+        matInput
+        [matTimepicker]="picker"
+        [value]="selectedHourMinute()"
+        (valueChange)="onTimeChange($event)"
+      />
+      <mat-timepicker-toggle matSuffix [for]="picker" />
+      <mat-timepicker #picker interval="30m" />
+    </mat-form-field>
+  </div>
+
 </div>

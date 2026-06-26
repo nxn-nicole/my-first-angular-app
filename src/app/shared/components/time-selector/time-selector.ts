@@ -1,5 +1,6 @@
-import { Component, input, linkedSignal, output } from '@angular/core';
+import { Component, forwardRef, input, linkedSignal, output } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTimepickerModule } from '@angular/material/timepicker';
@@ -10,8 +11,15 @@ import { Season } from '../../models/season.model';
   selector: 'app-time-selector',
   imports: [NgClass, MatFormFieldModule, MatInputModule, MatTimepickerModule],
   templateUrl: './time-selector.html',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TimeSelector),
+      multi: true,
+    },
+  ],
 })
-export class TimeSelector {
+export class TimeSelector implements ControlValueAccessor {
   initialTime = input<Time>();
   timeChanged = output<Time>();
 
@@ -26,15 +34,37 @@ export class TimeSelector {
     return time ? new Date(0, 0, 0, time.hour, time.minute) : null;
   });
 
+  private onChange: (value: Time) => void = () => {};
+  private onTouched: () => void = () => {};
+
+  writeValue(value: Time | null): void {
+    if (!value) return;
+    this.selectedYear.set(value.year);
+    this.selectedSeason.set(value.season);
+    this.selectedDay.set(value.day);
+    this.selectedHourMinute.set(new Date(0, 0, 0, value.hour, value.minute));
+  }
+
+  registerOnChange(fn: (value: Time) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
   private emit() {
     const d = this.selectedHourMinute();
-    this.timeChanged.emit({
+    const time: Time = {
       year: this.selectedYear(),
       season: this.selectedSeason(),
       day: this.selectedDay(),
       hour: d?.getHours() ?? 0,
       minute: d?.getMinutes() ?? 0,
-    });
+    };
+    this.timeChanged.emit(time);
+    this.onChange(time);
+    this.onTouched();
   }
 
   onYearChange(event: Event) {
